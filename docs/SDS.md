@@ -233,7 +233,6 @@
 ![state](diagrams/state.png)
 
 ## 4. Диаграмма классов
-  --in progress--  
 ![class](diagrams/class.png)
 
 ## 5. Диаграмма развёртывания
