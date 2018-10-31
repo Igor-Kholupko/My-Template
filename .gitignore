@@ -1,5 +1,6 @@
 # User-defined ignores
 modeling/
+media/
 
 # IDE external files
 .idea/
