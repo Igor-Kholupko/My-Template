@@ -1,0 +1,127 @@
+{% load i18n static %}
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:"en" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<html lang="en">
+
+<head>
+    <title>{% block title %}{{ title|default:"Templater" }}{% endblock %}</title>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}"
+    >
+
+    {% block extrastyle %}{% endblock %}
+
+    {% if LANGUAGE_BIDI %}
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}"
+        >
+    {% endif %}
+
+    {% block extrahead %}{% endblock %}
+
+    {% block responsive %}
+        <meta name="viewport"
+              content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"
+        >
+        <link rel="stylesheet"
+              type="text/css"
+              href="{% static "admin/css/responsive.css" %}"
+        >
+        {% if LANGUAGE_BIDI %}
+            <link rel="stylesheet"
+                  type="text/css"
+                  href="{% static "admin/css/responsive_rtl.css" %}"
+            >
+        {% endif %}
+    {% endblock %}
+
+    {% block blockbots %}
+        <meta name="robots" content="NONE, NOARCHIVE">
+    {% endblock %}
+</head>
+
+<body class="{% block bodyclass %}{% endblock %}"
+      data-admin-utc-offset="{% now "Z" %}"
+>
+
+    <!-- Container -->
+    <div id="container">
+
+        <!-- Header -->
+        <div id="header">
+
+            <div id="branding">
+            {% block branding %}
+                <h1 id="site-name">
+                    {% url 'home' as home_url %}
+                    <a href="{% firstof site_url home_url %}">
+                        {{ site_header|default:_('Templater') }}
+                    </a>
+                </h1>
+            {% endblock %}
+            </div>
+
+            {% block usertools %}
+                <div id="user-tools">
+                    {% if user.is_anonymous %}
+                        {% block welcome-msg-anonymous %}
+                            {% trans 'Welcome,' %}
+                            <strong>{% trans 'Dear Customer' %}</strong>.
+                        {% endblock %}
+                        {% block userlinks-anonymous %}
+                            <a href="{% url 'template_create' %}">{% trans 'Share' %}</a> /
+                            <a href="{% url 'login' %}">{% trans 'Log in' %}</a> /
+                            <a href="{% url 'signup' %}">{% trans 'Registration' %}</a>
+                        {% endblock %}
+
+                    {% else %}
+                        {% block welcome-msg %}
+                            {% trans 'Welcome,' %}
+                            <strong>{{ user.get_username }}</strong>.
+                        {% endblock %}
+                        {% block userlinks %}
+                            <a href="{{ my_page_url }}">{% trans 'My templates' %}</a> /
+                            <a href="{% url 'template_create' %}">{% trans 'Upload' %}</a> /
+                            {% if user.has_usable_password %}
+                                <a href="{% url 'password_change' %}">{% trans 'Change password' %}</a> /
+                            {% endif %}
+                            <a href="{% url 'logout' %}">{% trans 'Log out' %}</a>
+                        {% endblock %}
+                    {% endif %}
+                </div>
+            {% endblock %}
+            {% block nav-global %}{% endblock %}
+        </div>
+        <!-- END Header -->
+
+        {% block breadcrumbs %}
+            <div class="breadcrumbs"></div>
+        {% endblock %}
+
+        {% block messages %}
+        {% endblock messages %}
+
+        <!-- Content -->
+        <div id="content" class="{% block coltype %}colM{% endblock %}">
+            {% block pretitle %}{% endblock %}
+            {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+            {% block content %}
+            {% block object-tools %}{% endblock %}
+            {{ content }}
+            {% endblock %}
+            {% block sidebar %}{% endblock %}
+            <br class="clear">
+        </div>
+        <!-- END Content -->
+
+        {% block footer %}<div id="footer"></div>{% endblock %}
+    </div>
+    <!-- END Container -->
+
+</body>
+
+</html>

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'custom_auth',
+    # 'template',
 ]
 
 MIDDLEWARE = [
@@ -104,12 +105,18 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Unsettings all validators for debug and testing
+# TODO Should be deleted at release
 AUTH_PASSWORD_VALIDATORS.clear()
 
 
 # Custom user model
 
 AUTH_USER_MODEL = 'custom_auth.User'
+
+
+# URL to redirect user after authorization
+
+LOGIN_REDIRECT_URL = '/'
 
 
 # Application and models which permissions will be ignored
@@ -150,3 +157,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

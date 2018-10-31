@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import (
-    Group as _Group, PermissionsMixin as _PermissionsMixin, AbstractBaseUser, UnicodeUsernameValidator, UserManager,
+    Group as _Group, PermissionsMixin, AbstractBaseUser, UnicodeUsernameValidator, UserManager,
     send_mail
 )
 
@@ -26,27 +26,6 @@ class Group(_Group):
     class Meta:
         verbose_name = _('group')
         verbose_name_plural = _('groups')
-
-
-class PermissionsMixin(_PermissionsMixin):
-    """
-    Add the fields and methods necessary to support the Group and Permission
-    models using the ModelBackend.
-    """
-    groups = models.ManyToManyField(
-        Group,
-        verbose_name=_('groups'),
-        blank=True,
-        help_text=_(
-            'The groups this user belongs to. A user will get all permissions '
-            'granted to each of their groups.'
-        ),
-        related_name="user_set",
-        related_query_name="user",
-    )
-
-    class Meta:
-        abstract = True
 
 
 class AbstractUser(AbstractBaseUser, PermissionsMixin):
@@ -109,7 +88,14 @@ class User(AbstractUser):
     Users within the Django authentication system are represented by this
     model.
 
-    Username and password are required. Other fields are optional.
+    Username, email and password are required. Other fields are optional.
     """
+    email = models.EmailField(
+        _('email address'),
+        max_length=150,
+        blank=False,
+        help_text=_("Required. Email allows you reset password.")
+    )
+
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'
