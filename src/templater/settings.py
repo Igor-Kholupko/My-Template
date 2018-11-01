@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'custom_auth',
-    # 'template',
+    'template',
 ]
 
 MIDDLEWARE = [
