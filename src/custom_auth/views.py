@@ -1,5 +1,5 @@
 from django.contrib.admin.helpers import Fieldset
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView as _LoginView
 from django.contrib.auth.decorators import user_passes_test
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
@@ -11,8 +11,13 @@ from .models import User
 from .forms import UserRegistrationForm
 
 
-LoginView.success_url = "/"
-LoginView.redirect_authenticated_user = True
+class LoginView(_LoginView):
+    @method_decorator(user_passes_test(lambda u: not u.is_authenticated, login_url='/'))
+    @method_decorator(sensitive_post_parameters())
+    @method_decorator(csrf_protect)
+    @method_decorator(never_cache)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
 
 class RegistrationView(CreateView):
