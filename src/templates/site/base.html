@@ -12,6 +12,11 @@
           href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}"
     >
 
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static "site/css/base.css" %}"
+    >
+
     {% block extrastyle %}{% endblock %}
 
     {% if LANGUAGE_BIDI %}
@@ -63,6 +68,15 @@
                     </a>
                 </h1>
             {% endblock %}
+            </div>
+            <div id="second-branding">
+                {% if user.is_staff %}
+                <h1 id="administration-link">
+                    <a href="{% url 'admin:index' %}">
+                        {% trans 'Site administraiting' %}
+                    </a>
+                </h1>
+                {% endif %}
             </div>
 
             {% block usertools %}
