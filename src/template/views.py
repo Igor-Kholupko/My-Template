@@ -1,14 +1,20 @@
 from django.contrib.admin.helpers import Fieldset
 from django.contrib.admin import site
-from django.views.generic.edit import CreateView
-from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from .models import Template
-from .forms import TemplateCreateForm
+from django.utils.translation import ugettext_lazy as _
+from django.views.generic.edit import CreateView
+
+from template.models import Template
+from template.forms import TemplateCreateForm
 
 
 class TemplateCreate(CreateView):
+    """
+    Class of generic view for uploading/sharing page.
+
+    Handle post request and pass user owner of request to creation form.
+    Provides all required data to render fieldsets.
+    """
     model = Template
     form_class = TemplateCreateForm
     template_name = 'admin/template/template_creation_form.html'
@@ -18,10 +24,6 @@ class TemplateCreate(CreateView):
         'title_anon': _("Template sharing"),
         'has_file_field': True
     }
-
-    def __init__(self, *args, **kwargs):
-        self.object = None
-        super().__init__(*args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         """
@@ -33,13 +35,6 @@ class TemplateCreate(CreateView):
         request.POST.update({'user': str(request.user.id) if request.user.is_authenticated else ''})
         request.POST._mutable = False
         return super().post(request, *args, **kwargs)
-
-    def form_valid(self, form):
-        self.object = form.save()
-        return HttpResponseRedirect(self.get_success_url())
-
-    def get_success_url(self):
-        return self.success_url
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

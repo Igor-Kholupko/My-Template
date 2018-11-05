@@ -1,12 +1,19 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
-from .models import Template
-from .forms import TemplateAdminForm
+
+from template.models import Template
+from template.forms import TemplateAdminForm
 
 
 @admin.register(Template)
 class TemplateAdmin(admin.ModelAdmin):
+    """
+    Class for admin generic views of Template model.
+
+    Include user-defined options and overrides some basic methods
+    besides of using default options.
+    """
     add_form_template = 'admin/template/add_form.html'
     fieldsets = (
         (_("Template information"), {
@@ -23,6 +30,7 @@ class TemplateAdmin(admin.ModelAdmin):
         }),
     )
     form = TemplateAdminForm
+    add_readonly_fields = ()
     readonly_fields = ('user', 'email')
     list_display = ('name', 'user_field', 'is_shared')
     search_fields = ('name',)
@@ -41,7 +49,7 @@ class TemplateAdmin(admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         if not obj:
-            return ()
+            return self.add_readonly_fields
         return super().get_readonly_fields(request, obj)
 
     def get_empty_value_display(self):

@@ -7,11 +7,15 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic.edit import CreateView
-from .models import User
-from .forms import UserRegistrationForm
+
+from custom_auth.models import User
+from custom_auth.forms import UserRegistrationForm
 
 
 class LoginView(_LoginView):
+    """
+    Extended LoginView class with decorator to redirect authenticated users.
+    """
     @method_decorator(user_passes_test(lambda u: not u.is_authenticated, login_url='/'))
     @method_decorator(sensitive_post_parameters())
     @method_decorator(csrf_protect)
@@ -21,6 +25,9 @@ class LoginView(_LoginView):
 
 
 class RegistrationView(CreateView):
+    """
+    Generic view class for creating new user through registration form.
+    """
     model = User
     form_class = UserRegistrationForm
     template_name = 'registration/registration_form.html'

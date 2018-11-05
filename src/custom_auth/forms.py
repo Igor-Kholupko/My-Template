@@ -1,8 +1,14 @@
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+
+from custom_auth.models import User
 
 
 class UserRegistrationForm(UserCreationForm):
+    """
+    User registration form class. Extends default UserCreationForm class.
+
+    Email was added to required fields.
+    """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if self._meta.model.USERNAME_FIELD in self.fields:

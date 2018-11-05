@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from custom_auth.models import User
-from .validators import TemplateNameValidator
+from template.validators import TemplateNameValidator
 
 
 def _user_directory_path(instance, filename):
