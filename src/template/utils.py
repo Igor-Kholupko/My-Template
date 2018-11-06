@@ -25,9 +25,13 @@ def create_thumbnail(html_document_path, thumbnail_save_path=None):
         'quiet': '',
         'quality': '50'
     }
+    if settings.WKHTMLTOIMAGE_OPTION_XVFB:
+        options.update({'xvfb': ''})
     try:
         from_file(html_document_path, thumbnail_save_path, options=options)
     except OSError:
+        if settings.WKHTMLTOIMAGE_EXECUTABLE_PATH is None:
+            raise
         if environ.get('PATH').find(settings.WKHTMLTOIMAGE_EXECUTABLE_PATH) != -1:
             raise
         environ.update({'PATH': environ.get('PATH') + pathsep + settings.WKHTMLTOIMAGE_EXECUTABLE_PATH})

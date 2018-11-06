@@ -173,7 +173,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 WKHTMLTOIMAGE_EXECUTABLE_PATH = os.environ.get('WK_EXECUTABLE_PATH')
 
+
+# Flag that indicates that wkhtmltoimage will be called with --xvfb option
+# That needed if server has no XDisplay
+
+WKHTMLTOIMAGE_OPTION_XVFB = os.environ.get('WK_OPTION_XVFB')
+
 # Thumbnails creation settings
 
 THUMBNAIL_POSTFIX = '__thumbnail'
-THUMBNAIL_EXTENSION = 'png'
+THUMBNAIL_EXTENSION = 'jpg'
