@@ -127,6 +127,7 @@ UNRECOGNIZED_PERMISSION = {
     'sessions': 'all',
     'auth': 'all',
     'custom_auth': 'all',
+    'template': ('templatehelper',)
 }
 
 
@@ -164,3 +165,15 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# Path to opensource commandline tool 'wkhtmltoimage'
+# Also can be provided through PATH environment variable
+# https://wkhtmltopdf.org/
+
+WKHTMLTOIMAGE_EXECUTABLE_PATH = os.environ.get('WK_EXECUTABLE_PATH')
+
+# Thumbnails creation settings
+
+THUMBNAIL_POSTFIX = '__thumbnail'
+THUMBNAIL_EXTENSION = 'png'
