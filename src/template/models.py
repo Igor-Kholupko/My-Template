@@ -1,7 +1,10 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+
 from custom_auth.models import User
 from template.validators import TemplateNameValidator
+from template.utils import create_thumbnail
+from template.validators import HtmlExtensionValidator
 
 
 def _user_directory_path(instance, filename):
@@ -37,7 +40,8 @@ class Template(models.Model):
     )
     file = models.FileField(
         _('template file'),
-        upload_to=_user_directory_path
+        upload_to=_user_directory_path,
+        validators=[HtmlExtensionValidator()]
     )
     email = models.EmailField(
         _('email address'),
@@ -63,3 +67,63 @@ class Template(models.Model):
 
     def __str__(self):
         return self.name
+
+    def delete(self, using=None, keep_parents=False):
+        # TODO Override delete admin action
+        self.file.storage.delete(self.helper.thumbnail)
+        self.file.delete()
+        return super().delete(using, keep_parents)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        try:
+            if self.helper.is_reuploaded:
+                self.file.storage.delete(self.helper.thumbnail)
+                self.file.storage.delete(self.helper.file)
+                self.helper.thumbnail = create_thumbnail(self.file.path)
+                self.helper.file = self.file.path
+                self.helper.is_reuploaded = False
+                self.helper.save()
+        except TemplateHelper.DoesNotExist:
+            TemplateHelper.objects.create(
+                template=self,
+                thumbnail=create_thumbnail(self.file.path),
+                file=self.file.path,
+                is_reuploaded=False
+            )
+
+
+class TemplateHelper(models.Model):
+    template = models.OneToOneField(
+        Template,
+        on_delete=models.CASCADE,
+        related_name='helper',
+        primary_key=True
+    )
+    thumbnail = models.CharField(
+        max_length=260,
+        blank=True,
+        null=True,
+        default=None
+    )
+    file = models.CharField(
+        max_length=260,
+        blank=True,
+        null=True,
+        default=None
+    )
+    is_reuploaded = models.BooleanField(
+        blank=False,
+        default=False
+    )
+
+    class Meta:
+        verbose_name = _('template meta')
+        verbose_name_plural = _('templates meta')
+
+    def __str__(self):
+        return "'{}'-{}".format(
+            self.template.name,
+            _('meta')
+        )

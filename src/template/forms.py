@@ -40,6 +40,9 @@ class TemplateAdminForm(forms.ModelForm):
         cleaned_data = super().clean()
         if cleaned_data.get('user') is not None:
             cleaned_data.update({'email': cleaned_data.get('user').email})
+        if self.instance.pk is not None and 'file' in self.changed_data:
+            self.instance.helper.is_reuploaded = True
+            self.instance.helper.save()
         return cleaned_data
 
     def clean_user(self):
