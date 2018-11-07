@@ -54,3 +54,7 @@ class TemplateAdmin(admin.ModelAdmin):
 
     def get_empty_value_display(self):
         return mark_safe(_("Anonymous user"))
+
+    def delete_queryset(self, request, queryset):
+        for item in queryset:
+            item.delete()

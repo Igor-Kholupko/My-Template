@@ -1,0 +1,69 @@
+{% extends 'site/base.html'%}
+{% load i18n staticfiles %}
+
+{% block extrastyle %}
+
+	<link rel="stylesheet" href={% static 'site/css/grid.css' %}>
+    <link rel="stylesheet" href={% static 'admin/css/changelists.css' %}>
+
+{% endblock %}
+
+{% block content %}
+    <div class="module" id="changelist">
+        <div id="toolbar" class="unordered">
+            <form id="changelist-search" method="get"><div>
+                <label for="searchbar"><img src="{% static "admin/img/search.svg" %}" alt="Search"></label>
+                <input type="text" size="40" name="{{ search_var }}" value="{{ search_query }}" id="searchbar" autofocus>
+                <input type="submit" value="{% trans 'Search' %}">
+                {% if search_query %}
+                <span class="small quiet">
+                    <a href="?">
+                        {% trans "Show all" %}
+                    </a>
+                </span>
+                {% endif %}
+            </div>
+            </form>
+        </div>
+        {% if object_list %}
+            <div class="grid-wrapper">
+                {% for template in object_list %}
+                    <div class="grid-box with-margin visible float-inline quarter">
+                        <div class="template-cell">
+                            <a href="{# link #}">
+                                <img src="{{ MEDIA_URL }}{{ template.helper.thumbnail_media }}"
+                                     onerror="
+                                         this.onerror = null;
+                                         this.src = '{% static 'site/img/html-logo.jpg' %}';
+                                     "/>
+                                <p class="text-center">{{ template.name }}</p>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if is_paginated %}
+                <p class="paginator">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}">{% trans 'Previous' %}</a>
+                        {% endif %}
+                        <span class="page-current with-margin">
+                            {% blocktrans with n=page_obj.number p=page_obj.paginator.num_pages %}Page {{ n }} of {{ p }}
+                            {% endblocktrans %}
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">{% trans 'Next' %}</a>
+                        {% endif %}
+                    </span>
+                </p>
+            {% endif %}
+        {% else %}
+            {% if search_query %}
+                <h1 class="text-center">{% trans 'There are no results for your request' %}</h1>
+            {% else %}
+                <h1 class="text-center">{% trans 'Sorry... There are no templates yet :(' %}</h1>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

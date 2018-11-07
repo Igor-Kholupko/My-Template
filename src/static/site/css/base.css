@@ -1,3 +1,16 @@
 #second-branding {
     float: left;
 }
+
+.text-center {
+    text-align: center;
+}
+
+.page-current.with-margin {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#toolbar.unordered {
+    order: unset !important;
+}
