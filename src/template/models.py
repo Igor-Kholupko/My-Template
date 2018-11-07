@@ -1,9 +1,11 @@
+from os.path import relpath
 from django.db import models
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from custom_auth.models import User
 from template.validators import TemplateNameValidator
-from template.utils import create_thumbnail
+from template.utils import create_thumbnail, make_thumbnail_save_path
 from template.validators import HtmlExtensionValidator
 
 
@@ -69,8 +71,10 @@ class Template(models.Model):
         return self.name
 
     def delete(self, using=None, keep_parents=False):
-        # TODO Override delete admin action
-        self.file.storage.delete(self.helper.thumbnail)
+        try:
+            self.file.storage.delete(self.helper.thumbnail)
+        except TemplateHelper.DoesNotExist:
+            self.file.storage.delete(make_thumbnail_save_path(self.file.path))
         self.file.delete()
         return super().delete(using, keep_parents)
 
@@ -117,6 +121,10 @@ class TemplateHelper(models.Model):
         blank=False,
         default=False
     )
+
+    @property
+    def thumbnail_media(self):
+        return relpath(self.thumbnail, settings.MEDIA_ROOT)
 
     class Meta:
         verbose_name = _('template meta')

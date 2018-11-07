@@ -1,8 +1,8 @@
 from django.contrib.admin.helpers import Fieldset
 from django.contrib.admin import site
-from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
 
 from template.models import Template
 from template.forms import TemplateCreateForm
@@ -17,7 +17,7 @@ class TemplateCreate(CreateView):
     """
     model = Template
     form_class = TemplateCreateForm
-    template_name = 'admin/template/template_creation_form.html'
+    template_name = 'site/template/template_creation_form.html'
     success_url = '/templates/create/'
     extra_context = {
         'title': _("New template uploading"),
@@ -60,5 +60,30 @@ class TemplateCreate(CreateView):
         return context
 
 
-def home_page(request):
-    return render(request, 'site/base.html')
+class TemplateList(ListView):
+    """
+
+    """
+    model = Template
+    paginate_by = 8
+    template_name = 'site/template/template_list_form.html'
+    extra_context = {
+        'search_var': 'q'
+    }
+    ordering = '-id'
+
+    def get_queryset(self):
+        self.queryset = super().get_queryset().filter(is_shared__exact=True)
+        search_query = self.request.GET.get('q')
+        if search_query is not None:
+            self.queryset = self.queryset.filter(name__icontains=search_query)
+        return self.queryset
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        extra_content = {}
+        search_query = self.request.GET.get('q')
+        if search_query is not None:
+            extra_content.update({'search_query': search_query})
+        context.update(extra_content)
+        return context
