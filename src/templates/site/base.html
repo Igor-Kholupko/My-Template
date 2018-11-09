@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
 <html lang="{{ LANGUAGE_CODE|default:"en" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
-<html lang="en">
 
 <head>
     <title>{% block title %}{{ title|default:"Templater" }}{% endblock %}</title>
@@ -98,7 +97,7 @@
                             <strong>{{ user.get_username }}</strong>.
                         {% endblock %}
                         {% block userlinks %}
-                            <a href="{{ my_page_url }}">{% trans 'My templates' %}</a> /
+                            <a href="{% url 'template_list' user=user.id %}">{% trans 'My templates' %}</a> /
                             <a href="{% url 'template_create' %}">{% trans 'Upload' %}</a> /
                             {% if user.has_usable_password %}
                                 <a href="{% url 'password_change' %}">{% trans 'Change password' %}</a> /

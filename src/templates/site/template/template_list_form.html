@@ -30,7 +30,7 @@
                 {% for template in object_list %}
                     <div class="grid-box with-margin visible float-inline quarter">
                         <div class="template-cell">
-                            <a href="{# link #}">
+                            <a href="{% url 'template' pk=template.pk %}">
                                 <img src="{{ MEDIA_URL }}{{ template.helper.thumbnail_media }}"
                                      onerror="
                                          this.onerror = null;
@@ -46,14 +46,14 @@
                 <p class="paginator">
                     <span class="page-links">
                         {% if page_obj.has_previous %}
-                            <a href="?page={{ page_obj.previous_page_number }}">{% trans 'Previous' %}</a>
+                            <a href="?page={{ page_obj.previous_page_number }}{% if search_query %}&{{ search_var }}={{ search_query }}{% endif %}">{% trans 'Previous' %}</a>
                         {% endif %}
                         <span class="page-current with-margin">
                             {% blocktrans with n=page_obj.number p=page_obj.paginator.num_pages %}Page {{ n }} of {{ p }}
                             {% endblocktrans %}
                         </span>
                         {% if page_obj.has_next %}
-                            <a href="?page={{ page_obj.next_page_number }}">{% trans 'Next' %}</a>
+                            <a href="?page={{ page_obj.next_page_number }}{% if search_query %}&{{ search_var }}={{ search_query }}{% endif %}">{% trans 'Next' %}</a>
                         {% endif %}
                     </span>
                 </p>
