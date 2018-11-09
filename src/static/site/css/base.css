@@ -14,3 +14,85 @@
 #toolbar.unordered {
     order: unset !important;
 }
+
+.icon {
+    background-repeat: no-repeat !important;
+    background-position: right 7px center !important;
+    padding-right: 26px !important;
+}
+.icon.share {
+    background-image: url("../img/share.png") !important;
+}
+.icon.download {
+    background-image: url("../img/download.png") !important;
+}
+.icon.delete {
+    background-image: url("../img/delete.png") !important;
+}
+.icon.edit {
+    background-image: url("../img/edit.png") !important;
+}
+.icon.preview {
+    background-image: url("../img/preview.png") !important;
+}
+.icon.lock {
+    background-image: url("../img/lock.png") !important;
+}
+.icon.save {
+    background-image: url("../img/save.png") !important;
+}
+.icon.cancel {
+    background-image: url("../img/cancel.png") !important;
+}
+.icon.ok {
+    background-image: url("../img/ok.png") !important;
+}
+
+.template-thumbnail {
+    position: relative;
+    width: 100%;
+}
+.template-thumbnail img {
+    width: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.1);
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+.template-thumbnail img:hover {
+    box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.27);
+}
+@media (max-width: 1920px) {
+    .template-thumbnail img {
+        width: 70%;
+    }
+}
+@media (max-width: 1600px) {
+    .template-thumbnail img {
+        width: 79%;
+    }
+}
+@media (max-width: 900px) {
+    .template-thumbnail img {
+        width: 100%;
+    }
+}
+@media (max-device-width: 767px) {
+    .mo-mobile {
+        display: none !important;
+    }
+    .template-thumbnail {
+        margin-top: 50px;
+    }
+    .mobile-text-center {
+        text-align: center;
+    }
+    .object-tools {
+        float: right !important;
+    }
+}

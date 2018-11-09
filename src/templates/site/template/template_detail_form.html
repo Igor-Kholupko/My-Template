@@ -1,0 +1,125 @@
+{% extends 'site/base.html' %}
+{% load i18n staticfiles %}
+
+{% block title %}
+    {{ object.name }}
+{% endblock %}
+
+{% block extrastyle %}
+
+    <link rel="stylesheet" href="{% static 'admin/css/changelists.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'site/css/grid.css' %}">
+
+{% endblock %}
+
+{% block extrahead %}
+    <script type="text/javascript">
+        let readonly;
+        let textfield;
+        let editButton;
+        let cancelButton;
+        let saveButton;
+
+        function createTextField() {
+            textfield = document.createElement("textarea");
+            textfield.id = "id_description";
+            textfield.name = "description";
+            textfield.className = "vLargeTextField";
+            textfield.cols = "40";
+            textfield.rows = "10";
+            textfield.value = readonly.innerHTML;
+        }
+
+        function createCancelButton() {
+            cancelButton = document.createElement("input");
+            cancelButton.id = "cancel-button";
+            cancelButton.type = "button";
+            cancelButton.value = "{% trans 'Cancel' %}";
+            cancelButton.className = "icon cancel";
+            cancelButton.setAttribute("onclick", "enableEditor(false)");
+        }
+
+        function createSaveButton() {
+            saveButton = document.createElement("input");
+            saveButton.id = "save-button";
+            saveButton.type = "submit";
+            saveButton.name = "_edit";
+            saveButton.value = "{% trans 'Save' %}";
+            saveButton.className = "icon save";
+        }
+
+        function enableEditor(enable) {
+            if(enable) {
+                readonly = document.getElementById("id_description");
+                if (textfield == null) {
+                    createTextField();
+                }
+                readonly.parentNode.replaceChild(textfield, readonly);
+
+                if (editButton == null) {
+                    editButton = document.getElementById("edit-button");
+                }
+                if (cancelButton == null) {
+                    createCancelButton();
+                }
+                if (saveButton == null) {
+                    createSaveButton();
+                }
+                editButton.parentNode.replaceChild(cancelButton, editButton);
+                cancelButton.parentNode.insertBefore(saveButton, cancelButton);
+            }
+            else {
+                textfield.parentNode.replaceChild(readonly, textfield);
+                cancelButton.parentNode.replaceChild(editButton, cancelButton);
+                editButton.parentNode.removeChild(saveButton);
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block coltype %}flex{% endblock %}
+{% block content %}
+    <div id="content-main">
+        <h1 class="mobile-text-center">"{{ object.name }}" {% trans 'by' %} {{ object.user.username }}</h1>
+        <ul class="object-tools">
+            <li>
+                <a href="{% url 'template_preview' pk=object.pk %}" class="icon preview mo-mobile">{% trans 'Preview' %}</a>
+            </li>
+            <li>
+                <a href="{{ MEDIA_URL }}{{ object.file.path }}" class="icon download" download>{% trans 'Download' %}</a>
+            </li>
+        </ul>
+        <div class="template-thumbnail">
+            <img src="{{ MEDIA_URL }}{{ object.helper.thumbnail_media }}">
+        </div>
+        <form id="action-form" method="post">{% csrf_token %}
+            <fieldset class="module aligned" style="margin-top: 25px">
+                <h2>{% trans 'Template info' %}</h2>
+                <div class="form-row field-description">
+                    <div>
+                        <label for="id_description">{% trans 'Descriprion:' %}</label>
+                        <div id="id_description" class="readonly">{{ object.description|default:_("No description") }}</div>
+                    </div>
+                </div>
+            </fieldset>
+            {% if is_owner or user.is_staff %}
+                <div class="submit-row">
+                    <p class="deletelink-box"><a href="{% url 'template_delete' pk=object.pk %}" class="deletelink icon delete">{% trans 'Delete' %}</a></p>
+                    {% if is_owner %}
+                        {% if object.is_shared %}
+                            <input type="submit" value="{% trans 'Hide' %}" class="default icon lock" name="_hide">
+                        {% else %}
+                            <input type="submit" value="{% trans 'Share' %}" class="default icon share" name="_share">
+                        {% endif %}
+                        <input id="edit-button"
+                               type="button"
+                               value="{% trans 'Edit' %}"
+                               class="icon edit"
+                               onclick="enableEditor(true)">
+                    {% endif %}
+                </div>
+            {% endif %}
+        </form>
+    </div>
+{% endblock %}

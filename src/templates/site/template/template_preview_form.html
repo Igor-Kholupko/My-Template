@@ -1,0 +1,25 @@
+{% extends 'site/base.html' %}
+
+{% block extrastyle %}
+    <style>
+        #content {
+            padding: unset !important;
+        }
+    </style>
+{% endblock %}
+
+{% block extrahead %}
+    <script>
+
+        function adjustSize(iframe) {
+            iframe.style.width = 100 + '%';
+            iframe.style.height = iframe.contentWindow.outerHeight + 'px';
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    <iframe src="{{ MEDIA_URL }}{{ file }}" frameborder="0" onload="adjustSize(this);"></iframe>
+{% endblock %}
+
+{% block footer %}{% endblock %}

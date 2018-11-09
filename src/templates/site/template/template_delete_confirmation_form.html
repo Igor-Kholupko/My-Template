@@ -1,0 +1,20 @@
+{% extends 'site/base.html' %}
+{% load i18n static %}
+
+{% block extrahead %}
+    <script type="text/javascript" src="{% static 'admin/js/cancel.js' %}"></script>
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} delete-confirmation{% endblock %}
+
+{% block content_title %}<h1>{% trans 'Are you sure?' %}</h1>{% endblock %}
+
+{% block content %}
+    <p>{% blocktrans with name=object.name %}Are you sure you want to delete the "{{ name }}"?{% endblocktrans %}</p>
+    <form method="post">{% csrf_token %}
+        <div>
+            <input type="submit" value="{% trans "Yes, I'm sure" %}">
+            <a href="{% url 'template' pk=object.pk %}" class="button cancel-link">{% trans "No, take me back" %}</a>
+        </div>
+    </form>
+{% endblock %}
