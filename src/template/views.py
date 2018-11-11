@@ -56,7 +56,7 @@ class TemplateCreate(CreateView):
             readonly_fields=readonly_fields,
             classes=('wide',),
             fields=fields,
-            model_admin=site._registry.get(Template)
+            model_admin=site.get_model_admin(Template)
         )
         return context
 
