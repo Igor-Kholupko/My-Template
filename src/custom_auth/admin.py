@@ -1,13 +1,11 @@
-from django.contrib import admin
+from templater import admin
 from django.contrib.auth.admin import UserAdmin as _UserAdmin, GroupAdmin
-from django.contrib.auth.models import Group as _Group
 from django.utils.translation import ugettext_lazy as _
 
 from custom_auth.models import User, Group
 
 
 # Registration of custom Group model instead of default.
-admin.site.unregister(_Group)
 admin.site.register(Group, GroupAdmin)
 
 

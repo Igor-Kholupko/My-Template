@@ -1,4 +1,5 @@
-from django.contrib import admin
+from templater import admin
+from django.contrib.admin import ModelAdmin
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
 
@@ -7,7 +8,7 @@ from template.forms import TemplateAdminForm
 
 
 @admin.register(Template)
-class TemplateAdmin(admin.ModelAdmin):
+class TemplateAdmin(ModelAdmin):
     """
     Class for admin generic views of Template model.
 
