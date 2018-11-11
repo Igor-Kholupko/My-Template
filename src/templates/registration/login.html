@@ -50,7 +50,8 @@
         <div class="form-row">
             {{ form.password.errors }}
             {{ form.password.label_tag }} {{ form.password }}
-            <input type="hidden" name="next" value="{{ site_url|default:'/' }}">
+            {% url 'home' as home_url %}
+            <input type="hidden" name="next" value="{% firstof site_url home_url %}">
         </div>
         {% url 'password_reset' as password_reset_url %}
         {% if password_reset_url %}
@@ -59,7 +60,6 @@
             </div>
         {% endif %}
         <div class="submit-row">
-            <label>&nbsp;</label>
             <input type="submit" value="{% trans 'Log in' %}">
         </div>
     </form>

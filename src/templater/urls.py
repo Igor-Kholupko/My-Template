@@ -16,10 +16,11 @@ Including another URLconf
 from templater import admin
 from django.urls import path, include
 from template.views import TemplateList
+from django.conf.urls.i18n import i18n_patterns
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('accounts/', include('custom_auth.urls')),
     path('templates/', include('template.urls')),
     path('', TemplateList.as_view(), name='home'),
-]
+)

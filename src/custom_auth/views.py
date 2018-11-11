@@ -1,6 +1,7 @@
 from django.contrib.admin.helpers import Fieldset
 from django.contrib.auth.views import LoginView as _LoginView
 from django.contrib.auth.decorators import user_passes_test
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.cache import never_cache
@@ -16,7 +17,7 @@ class LoginView(_LoginView):
     """
     Extended LoginView class with decorator to redirect authenticated users.
     """
-    @method_decorator(user_passes_test(lambda u: not u.is_authenticated, login_url='/'))
+    @method_decorator(user_passes_test(lambda u: not u.is_authenticated, login_url=reverse_lazy('home')))
     @method_decorator(sensitive_post_parameters())
     @method_decorator(csrf_protect)
     @method_decorator(never_cache)
@@ -31,12 +32,12 @@ class RegistrationView(CreateView):
     model = User
     form_class = UserRegistrationForm
     template_name = 'registration/registration_form.html'
-    success_url = '/accounts/login'
+    success_url = reverse_lazy('login')
     extra_context = {
         'title': _("New user registration")
     }
 
-    @method_decorator(user_passes_test(lambda u: not u.is_authenticated, login_url='/'))
+    @method_decorator(user_passes_test(lambda u: not u.is_authenticated, login_url=reverse_lazy('home')))
     @method_decorator(sensitive_post_parameters())
     @method_decorator(csrf_protect)
     @method_decorator(never_cache)
