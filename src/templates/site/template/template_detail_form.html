@@ -81,17 +81,21 @@
 {% block coltype %}flex{% endblock %}
 {% block content %}
     <div id="content-main">
-        <h1 class="mobile-text-center">"{{ object.name }}" {% trans 'by' %} {{ object.user.username }}</h1>
+        <h1 class="mobile-text-center">"{{ object.name }}" {% trans 'by' %} {% firstof object.user.username object.email %}</h1>
         <ul class="object-tools">
             <li>
                 <a href="{% url 'template_preview' pk=object.pk %}" class="icon preview mo-mobile">{% trans 'Preview' %}</a>
             </li>
             <li>
-                <a href="{{ MEDIA_URL }}{{ object.file.path }}" class="icon download" download>{% trans 'Download' %}</a>
+                <a href="{{ MEDIA_URL }}{{ object.file.name }}" class="icon download" download>{% trans 'Download' %}</a>
             </li>
         </ul>
         <div class="template-thumbnail">
-            <img src="{{ MEDIA_URL }}{{ object.helper.thumbnail_media }}">
+            <img src="{{ MEDIA_URL }}{{ object.helper.thumbnail_media }}"
+                 onerror="
+                     this.onerror = null;
+                     this.src = '{% static 'site/img/html-logo.jpg' %}';
+                 "/>
         </div>
         <form id="action-form" method="post">{% csrf_token %}
             <fieldset class="module aligned" style="margin-top: 25px">
