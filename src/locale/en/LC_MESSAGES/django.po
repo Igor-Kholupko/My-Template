@@ -1,0 +1,479 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-11 17:11+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\custom_auth\admin.py:22
+msgid "Personal info"
+msgstr ""
+
+#: .\custom_auth\admin.py:23
+msgid "Permissions"
+msgstr ""
+
+#: .\custom_auth\apps.py:10
+msgid "Authentication and Authorization"
+msgstr ""
+
+#: .\custom_auth\models.py:27
+msgid "group"
+msgstr ""
+
+#: .\custom_auth\models.py:28
+msgid "groups"
+msgstr ""
+
+#: .\custom_auth\models.py:41
+msgid "username"
+msgstr ""
+
+#: .\custom_auth\models.py:44
+msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr ""
+
+#: .\custom_auth\models.py:47
+msgid "A user with that username already exists."
+msgstr ""
+
+#: .\custom_auth\models.py:51 .\custom_auth\models.py:94
+#: .\template\models.py:49
+msgid "email address"
+msgstr ""
+
+#: .\custom_auth\models.py:53
+msgid "staff status"
+msgstr ""
+
+#: .\custom_auth\models.py:55
+msgid "Designates whether the user can log into this admin site."
+msgstr ""
+
+#: .\custom_auth\models.py:58
+msgid "active"
+msgstr ""
+
+#: .\custom_auth\models.py:61
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+
+#: .\custom_auth\models.py:73
+msgid "user"
+msgstr ""
+
+#: .\custom_auth\models.py:74
+msgid "users"
+msgstr ""
+
+#: .\custom_auth\models.py:97
+msgid "Required. Email allows you reset password."
+msgstr ""
+
+#: .\custom_auth\views.py:37
+msgid "New user registration"
+msgstr ""
+
+#: .\template\admin.py:20
+msgid "Template information"
+msgstr ""
+
+#: .\template\admin.py:23
+msgid "Media files"
+msgstr ""
+
+#: .\template\admin.py:42 .\template\models.py:39
+msgid "owner"
+msgstr ""
+
+#: .\template\admin.py:43 .\template\admin.py:57 .\template\forms.py:13
+msgid "Anonymous user"
+msgstr ""
+
+#: .\template\apps.py:10
+msgid "Templates"
+msgstr ""
+
+#: .\template\models.py:30
+msgid "template name"
+msgstr ""
+
+#: .\template\models.py:33
+msgid ""
+"Required. 150 characters or fewer. Letters, digits, whitespaces and @/./+/-/"
+"_ only."
+msgstr ""
+
+#: .\template\models.py:44
+msgid "template file"
+msgstr ""
+
+#: .\template\models.py:52
+msgid ""
+"Required if owner is anonymous user. Email allows to identify him in future."
+msgstr ""
+
+#: .\template\models.py:55
+msgid "is shared"
+msgstr ""
+
+#: .\template\models.py:58
+msgid "This flag make template available to other user."
+msgstr ""
+
+#: .\template\models.py:61
+msgid "description"
+msgstr ""
+
+#: .\template\models.py:67
+msgid "template"
+msgstr ""
+
+#: .\template\models.py:68
+msgid "templates"
+msgstr ""
+
+#: .\template\models.py:130
+msgid "template meta"
+msgstr ""
+
+#: .\template\models.py:131
+msgid "templates meta"
+msgstr ""
+
+#: .\template\models.py:136
+msgid "meta"
+msgstr ""
+
+#: .\template\validators.py:14
+msgid ""
+"Enter a valid template name. This value may contain only letters, numbers, "
+"whitespaces, and @/./+/-/_ characters."
+msgstr ""
+
+#: .\template\validators.py:25
+msgid "File content should be HTML template document."
+msgstr ""
+
+#: .\template\views.py:24
+msgid "New template uploading"
+msgstr ""
+
+#: .\template\views.py:25
+msgid "Template sharing"
+msgstr ""
+
+#: .\templater\admin.py:11
+msgid "Templater site admin"
+msgstr ""
+
+#: .\templater\admin.py:14 .\templates\registration\password_change_done.html:8
+#: .\templates\registration\password_change_form.html:8
+#: .\templates\registration\password_reset_complete.html:8
+#: .\templates\registration\password_reset_confirm.html:8
+#: .\templates\registration\password_reset_done.html:8
+#: .\templates\registration\password_reset_form.html:8
+msgid "Templater administration"
+msgstr ""
+
+#: .\templater\settings.py:144
+msgid "Russian"
+msgstr ""
+
+#: .\templater\settings.py:145
+msgid "English"
+msgstr ""
+
+#: .\templates\admin\custom_auth\user\add_form.html:6
+msgid ""
+"First, enter a username, email and password. Then, you'll be able to edit "
+"more user options."
+msgstr ""
+
+#: .\templates\admin\custom_auth\user\add_form.html:8
+#: .\templates\registration\registration_form.html:7
+msgid "Enter a username, email and password."
+msgstr ""
+
+#: .\templates\admin\template\add_form.html:5
+msgid ""
+"Enter a template name and choose file. Also you can optionally select owner "
+"of template."
+msgstr ""
+
+#: .\templates\registration\logged_out.html:8
+msgid "Thanks for spending some quality time with the Web site today."
+msgstr ""
+
+#: .\templates\registration\logged_out.html:10
+msgid "Log in again"
+msgstr ""
+
+#: .\templates\registration\login.html:19
+#: .\templates\registration\password_change_form.html:35
+#: .\templates\site\create_base.html:30
+msgid "Please correct the error below."
+msgstr ""
+
+#: .\templates\registration\login.html:21
+#: .\templates\registration\password_change_form.html:35
+#: .\templates\site\create_base.html:32
+msgid "Please correct the errors below."
+msgstr ""
+
+#: .\templates\registration\login.html:38
+#, python-format
+msgid ""
+"You are authenticated as %(username)s, but are not authorized to access this "
+"page. Would you like to login to a different account?"
+msgstr ""
+
+#: .\templates\registration\login.html:59
+msgid "Forgotten your password or username?"
+msgstr ""
+
+#: .\templates\registration\login.html:63
+#: .\templates\registration\password_reset_complete.html:18
+#: .\templates\site\base.html:90
+msgid "Log in"
+msgstr ""
+
+#: .\templates\registration\password_change_done.html:14
+msgid "Your password was changed."
+msgstr ""
+
+#: .\templates\registration\password_change_form.html:23
+#: .\templates\registration\password_reset_done.html:14
+#: .\templates\registration\password_reset_form.html:19
+#: .\templates\site\base.html:100
+msgid "My templates"
+msgstr ""
+
+#: .\templates\registration\password_change_form.html:24
+#: .\templates\registration\password_reset_done.html:15
+#: .\templates\registration\password_reset_form.html:20
+#: .\templates\site\base.html:101
+#: .\templates\site\template\template_creation_form.html:35
+msgid "Upload"
+msgstr ""
+
+#: .\templates\registration\password_change_form.html:25
+#: .\templates\registration\password_reset_done.html:16
+#: .\templates\registration\password_reset_form.html:21
+#: .\templates\site\base.html:105
+msgid "Log out"
+msgstr ""
+
+#: .\templates\registration\password_change_form.html:40
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+
+#: .\templates\registration\password_change_form.html:68
+#: .\templates\registration\password_reset_confirm.html:39
+msgid "Change my password"
+msgstr ""
+
+#: .\templates\registration\password_reset_complete.html:15
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr ""
+
+#: .\templates\registration\password_reset_confirm.html:25
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: .\templates\registration\password_reset_confirm.html:31
+msgid "New password:"
+msgstr ""
+
+#: .\templates\registration\password_reset_confirm.html:36
+msgid "Confirm password:"
+msgstr ""
+
+#: .\templates\registration\password_reset_confirm.html:45
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: .\templates\registration\password_reset_done.html:20
+#: .\templates\registration\password_reset_form.html:25
+#: .\templates\site\base.html:89
+#: .\templates\site\template\template_creation_form.html:33
+#: .\templates\site\template\template_detail_form.html:113
+msgid "Share"
+msgstr ""
+
+#: .\templates\registration\password_reset_done.html:21
+#: .\templates\registration\password_reset_form.html:26
+#: .\templates\site\base.html:91
+msgid "Registration"
+msgstr ""
+
+#: .\templates\registration\password_reset_done.html:27
+msgid ""
+"We've emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly."
+msgstr ""
+
+#: .\templates\registration\password_reset_done.html:29
+msgid ""
+"If you don't receive an email, please make sure you've entered the address "
+"you registered with, and check your spam folder."
+msgstr ""
+
+#: .\templates\registration\password_reset_form.html:35
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email "
+"instructions for setting a new one."
+msgstr ""
+
+#: .\templates\registration\password_reset_form.html:41
+msgid "Email address:"
+msgstr ""
+
+#: .\templates\registration\password_reset_form.html:45
+msgid "Reset my password"
+msgstr ""
+
+#: .\templates\registration\registration_form.html:11
+msgid "Register"
+msgstr ""
+
+#: .\templates\site\base.html:66
+msgid "Templater"
+msgstr ""
+
+#: .\templates\site\base.html:75
+msgid "Site administraiting"
+msgstr ""
+
+#: .\templates\site\base.html:85 .\templates\site\base.html:96
+msgid "Welcome,"
+msgstr ""
+
+#: .\templates\site\base.html:86
+msgid "Dear Customer"
+msgstr ""
+
+#: .\templates\site\base.html:103
+msgid "Change password"
+msgstr ""
+
+#: .\templates\site\template\template_creation_form.html:24
+msgid "Enter a template name, your email and choose file to share."
+msgstr ""
+
+#: .\templates\site\template\template_creation_form.html:27
+msgid "Enter a template name and choose file to upload."
+msgstr ""
+
+#: .\templates\site\template\template_delete_confirmation_form.html:10
+msgid "Are you sure?"
+msgstr ""
+
+#: .\templates\site\template\template_delete_confirmation_form.html:13
+#, python-format
+msgid "Are you sure you want to delete the \"%(name)s\"?"
+msgstr ""
+
+#: .\templates\site\template\template_delete_confirmation_form.html:16
+msgid "Yes, I'm sure"
+msgstr ""
+
+#: .\templates\site\template\template_delete_confirmation_form.html:17
+msgid "No, take me back"
+msgstr ""
+
+#: .\templates\site\template\template_detail_form.html:38
+msgid "Cancel"
+msgstr ""
+
+#: .\templates\site\template\template_detail_form.html:48
+msgid "Save"
+msgstr ""
+
+#: .\templates\site\template\template_detail_form.html:84
+msgid "by"
+msgstr ""
+
+#: .\templates\site\template\template_detail_form.html:87
+msgid "Preview"
+msgstr ""
+
+#: .\templates\site\template\template_detail_form.html:90
+msgid "Download"
+msgstr ""
+
+#: .\templates\site\template\template_detail_form.html:98
+msgid "Template info"
+msgstr ""
+
+#: .\templates\site\template\template_detail_form.html:101
+msgid "Descriprion:"
+msgstr ""
+
+#: .\templates\site\template\template_detail_form.html:102
+msgid "No description"
+msgstr ""
+
+#: .\templates\site\template\template_detail_form.html:108
+msgid "Delete"
+msgstr ""
+
+#: .\templates\site\template\template_detail_form.html:111
+msgid "Hide"
+msgstr ""
+
+#: .\templates\site\template\template_detail_form.html:117
+msgid "Edit"
+msgstr ""
+
+#: .\templates\site\template\template_list_form.html:17
+msgid "Search"
+msgstr ""
+
+#: .\templates\site\template\template_list_form.html:21
+msgid "Show all"
+msgstr ""
+
+#: .\templates\site\template\template_list_form.html:49
+msgid "Previous"
+msgstr ""
+
+#: .\templates\site\template\template_list_form.html:52
+#, python-format
+msgid ""
+"Page %(n)s of %(p)s\n"
+"                            "
+msgstr ""
+
+#: .\templates\site\template\template_list_form.html:56
+msgid "Next"
+msgstr ""
+
+#: .\templates\site\template\template_list_form.html:63
+msgid "There are no results for your request"
+msgstr ""
+
+#: .\templates\site\template\template_list_form.html:65
+msgid "Sorry... There are no templates yet :("
+msgstr ""

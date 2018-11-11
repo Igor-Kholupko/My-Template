@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'templater.urls'
@@ -115,11 +116,6 @@ AUTH_PASSWORD_VALIDATORS.clear()
 AUTH_USER_MODEL = 'custom_auth.User'
 
 
-# URL to redirect user after authorization
-
-LOGIN_REDIRECT_URL = '/'
-
-
 # Application and models which permissions will be ignored
 
 UNRECOGNIZED_PERMISSION = {
@@ -135,7 +131,7 @@ UNRECOGNIZED_PERMISSION = {
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'ru'
 
 
 # List of available languages
