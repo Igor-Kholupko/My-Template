@@ -129,6 +129,9 @@ class TemplateDetail(DetailView):
             self.object.is_shared = False
         elif '_edit' in request.POST and 'description' in request.POST:
             self.object.description = request.POST.get('description')
+        if 'file' in request.FILES:
+            self.object.helper.is_reuploaded = True
+            self.object.file = request.FILES.get('file')
         self.object.save()
         return HttpResponseRedirect(request.path_info)
 

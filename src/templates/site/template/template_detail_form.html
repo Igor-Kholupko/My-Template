@@ -20,6 +20,7 @@
         let editButton;
         let cancelButton;
         let saveButton;
+        let fileFieldset;
 
         function createTextField() {
             textfield = document.createElement("textarea");
@@ -52,6 +53,8 @@
         function enableEditor(enable) {
             if(enable) {
                 readonly = document.getElementById("id_description");
+                fileFieldset = document.getElementById("file_fieldset");
+                fileFieldset.hidden = false;
                 if (textfield == null) {
                     createTextField();
                 }
@@ -73,6 +76,7 @@
                 textfield.parentNode.replaceChild(readonly, textfield);
                 cancelButton.parentNode.replaceChild(editButton, cancelButton);
                 editButton.parentNode.removeChild(saveButton);
+                fileFieldset.hidden = true;
             }
         }
     </script>
@@ -97,13 +101,24 @@
                      this.src = '{% static 'site/img/html-logo.jpg' %}';
                  "/>
         </div>
-        <form id="action-form" method="post">{% csrf_token %}
+        <form enctype="multipart/form-data" id="action-form" method="post">{% csrf_token %}
             <fieldset class="module aligned" style="margin-top: 25px">
                 <h2>{% trans 'Template info' %}</h2>
                 <div class="form-row field-description">
                     <div>
                         <label for="id_description">{% trans 'Descriprion:' %}</label>
                         <div id="id_description" class="readonly">{{ object.description|default:_("No description") }}</div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset id="file_fieldset" class="module aligned " hidden>
+                <h2>{% trans 'Media files' %}</h2>
+                <div class="form-row field-file">
+                    <div>
+                        <label for="id_file">{% trans 'File' %}:</label>
+                        <p class="file-upload">
+                            <input type="file" name="file" id="id_file">
+                        </p>
                     </div>
                 </div>
             </fieldset>
