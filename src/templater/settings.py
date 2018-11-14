@@ -199,3 +199,10 @@ WKHTMLTOIMAGE_OPTION_XVFB = os.environ.get('WK_OPTION_XVFB')
 
 THUMBNAIL_POSTFIX = '__thumbnail'
 THUMBNAIL_EXTENSION = 'jpg'
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')

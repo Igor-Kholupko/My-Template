@@ -2,6 +2,8 @@
 modeling/
 media/
 /static/
+sys_requirements.txt
+favicon.ico
 
 # IDE external files
 .idea/
